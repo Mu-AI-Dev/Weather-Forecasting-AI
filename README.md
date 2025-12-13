@@ -78,16 +78,13 @@ Created intelligent features to capture weather patterns:
 ## 📁 Project Structure
 
 Weather-Forecasting-AI/
-│
 ├── data/
-│ └── weather_forecasting_dataset.csv # Raw weather data
-│
+│   └── weather_forecasting_dataset.csv     # Raw weather data
 ├── notebooks/
-│ └── Weather-Forecasting.ipynb # Full analysis & modeling
-│
-├── requirements.txt # Python dependencies
-│
+│   └── Weather-Forecasting.ipynb           # Full analysis & modeling
+├── requirements.txt                         # Python dependencies
 └── README.md
+
 
 ## 🚀 How to Run
 
