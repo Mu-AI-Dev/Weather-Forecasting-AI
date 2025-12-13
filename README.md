@@ -86,8 +86,8 @@ Weather-Forecasting-AI/
 │ └── Weather-Forecasting.ipynb # Full analysis & modeling
 │
 ├── requirements.txt # Python dependencies
-|
-└── README.md 
+│
+└── README.md
 
 ## 🚀 How to Run
 
