@@ -117,5 +117,6 @@ Muhammad Abdulrahman Ali
 🎓 Computer Science Student | Aspiring AI Engineer
 📍 Egypt
 
-LinkedIn: https://www.linkedin.com/in/muhammad-abdelrahaman  | GitHub: https://github.com/Mu-AI-Dev
+Email: md.abdelrahmn@gmail.com
+LinkedIn: https://www.linkedin.com/in/muhammad-abdelrahaman
 
