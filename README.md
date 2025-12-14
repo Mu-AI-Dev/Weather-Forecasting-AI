@@ -114,6 +114,6 @@ Muhammad Abdulrahman Ali
 🎓 Computer Science Student | Aspiring AI Engineer
 📍 Egypt
 
-Email: md.abdelrahmn@gmail.com
-LinkedIn: https://www.linkedin.com/in/muhammad-abdelrahaman
+Email: md.abdelrahmn@gmail.com | 
+LinkedIn: https://www.linkedin.com/in/muhammad-abdelrahaman 
 
