@@ -69,7 +69,7 @@ Raw data wasn't enough. I engineered **12+ new features** to improve model sensi
 ---
 
 ## 📁 Project Structure
-
+```
 Weather-Forecasting-AI/
 ├── app.py # Main Streamlit Application (Frontend & Logic)
 ├── requirements.txt # Dependencies for deployment
@@ -80,7 +80,7 @@ Weather-Forecasting-AI/
 ├── notebooks/ # Research & Training
 │ └── Weather-Forecasting.ipynb
 └── data/ # Raw Dataset
-
+```
 
 ---
 
@@ -133,7 +133,7 @@ If you want to run this app on your own machine:
 
 *   📍 **Location:** Egypt
 *   📧 **Email:** [md.abdelrahmn@gmail.com](mailto:md.abdelrahmn@gmail.com)
-*   🔗 **LinkedIn:** [muhammad-abdelrahama](https://www.linkedin.com/in/muhammad-abdelrahama)
+*   🔗 **LinkedIn:** [muhammad-abdelrahama](www.linkedin.com/in/muhammad--abdulrahman)
 *   🐙 **GitHub:** [Mu-AI-Dev](https://github.com/Mu-AI-Dev)
 
 ---
