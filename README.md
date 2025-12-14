@@ -36,10 +36,12 @@ The model was trained on **2,000+ observations** containing complex atmospheric 
 
 The system is built on a dual-model architecture:
 
-graph LR
 A[Input Data] --> B{Classifier Model}
+
 B -- No Rain --> C[Result: Dry Day ☀️]
+
 B -- Rain Expected --> D[Regressor Model]
+
 D --> E[Result: Rain Intensity (mm) 🌧️]
 
 
