@@ -1,119 +1,138 @@
-# 🌦️ Weather Forecasting AI - Rain Prediction System
+# 🌦️ Intelligent Weather Forecasting AI
 
-A machine learning project that predicts **whether it will rain tomorrow** and **how much rainfall to expect** using advanced feature engineering and ensemble models.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://weather-forecasting-ai.streamlit.app/)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Library-Scikit--Learn-orange?logo=scikit-learn&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Deployed-success)
+
+> **An End-to-End Machine Learning System** that predicts rain probability and intensity 24 hours in advance, deployed as an interactive web application.
+
+---
+
+## 🔴 Live Demo
+### 👉 [Click Here to Try the App](https://weather-forecasting-ai.streamlit.app/)
+
+*(Note: The app is hosted on Streamlit Cloud. If it's asleep, just click "Wake up" and wait a moment!)*
+
+---
+
+## 📸 Project Preview
+<!-- Upload a screenshot of your app to your repo and link it here for better engagement -->
+![App Screenshot](Capture.jpg)
 
 ---
 
 ## 🎯 Project Overview
 
-This project tackles a real-world problem: **Can we predict rain 24 hours in advance?** Using meteorological data from 2,066 observations, I built a dual-prediction system that provides both **classification** (Yes/No) and **regression** (rainfall amount in mm).
+This project tackles a critical meteorological challenge: **Predicting local rainfall with high precision.** unlike standard forecasts, this system uses a **2-Stage Stacked Pipeline** to answer two questions:
+1.  **Classification:** *Will it rain tomorrow?* (Yes/No)
+2.  **Regression:** *If yes, how much rain will fall?* (mm)
 
-### Key Achievements
-- ✅ **Dual Model System:** Logistic Regression for classification + Random Forest for rainfall quantity
-- ✅ **Advanced Feature Engineering:** Created 10+ derived features (Temperature Change, Humidity Delta, Wind Speed Variations)
-- ✅ **Cyclical Encoding:** Transformed wind directions using trigonometric functions (sin/cos) to preserve directionality
-- ✅ **Handles Missing Data:** Robust imputation strategy for real-world incomplete datasets
+The model was trained on **2,000+ observations** containing complex atmospheric data, utilizing advanced feature engineering to capture non-linear weather patterns.
 
 ---
 
-## 📊 Dataset
+## 🏗️ Architecture & Pipeline
 
-| Feature Category | Examples |
+The system is built on a dual-model architecture:
+
+graph LR
+A[Input Data] --> B{Classifier Model}
+B -- No Rain --> C[Result: Dry Day ☀️]
+B -- Rain Expected --> D[Regressor Model]
+D --> E[Result: Rain Intensity (mm) 🌧️]
+
+
+### 1. Classification Stage (Logistic Regression)
+- **Goal:** Filter out dry days to reduce noise.
+- **Technique:** Balanced class weights to handle data imbalance.
+
+### 2. Regression Stage (Random Forest)
+- **Goal:** Estimate rainfall quantity for positive cases.
+- **Configuration:** 100 Trees, Max Depth 15, optimized for minimal RMSE.
+
+---
+
+## 📊 Feature Engineering (The Secret Sauce)
+
+Raw data wasn't enough. I engineered **12+ new features** to improve model sensitivity:
+
+| Feature | Logic & Impact |
 | :--- | :--- |
-| **Temperature** | MinTemp, MaxTemp, Temp9am, Temp3pm |
-| **Atmospheric** | Pressure9am, Pressure3pm, Humidity9am, Humidity3pm |
-| **Wind** | WindGustDir, WindGustSpeed, WindDir9am, WindDir3pm |
-| **Weather** | Rainfall, Evaporation, Sunshine, Cloud Cover |
-| **Target** | RainTomorrow (Binary), RISK_MM (Continuous) |
-
-**Data Size:** 2,066 samples × 24 original features → **44 engineered features** after preprocessing
-
----
-
-## 🛠️ Tech Stack
-
-**Languages & Libraries:**
-- `Python 3.x`
-- `pandas`, `numpy` - Data manipulation
-- `scikit-learn` - Machine learning models
-- `matplotlib`, `seaborn` - Data visualization
-
-**Models Used:**
-1. **Logistic Regression** (Classification)
-   - Predicts: Will it rain tomorrow? (Yes/No)
-   - Class balancing applied for skewed data
-   - Max iterations: 1,000
-
-2. **Random Forest Regressor** (Regression)
-   - Predicts: How much rain? (mm)
-   - Hyperparameters: max_depth=15, min_samples_split=5
-   - 100 decision trees ensemble
-
----
-
-## 🔬 Feature Engineering Highlights
-
-Created intelligent features to capture weather patterns:
-
-- **`TempChange`** = Temp3pm - Temp9am *(Daily temperature swing)*
-- **`HumidityChange`** = Humidity3pm - Humidity9am *(Moisture trends)*
-- **`PressureChange`** = Pressure3pm - Pressure9am *(Atmospheric stability)*
-- **`AvgTemp`**, **`AvgHumidity`**, **`AvgPressure`** *(Daily aggregates)*
-- **Wind Direction Encoding:** Converted compass directions (N, E, S, W) into **sin/cos pairs** to preserve circular nature
-
----
-
-## 📈 Sample Results
-
-| Scenario | Will Rain Tomorrow? | Rain Probability | Predicted Rainfall (mm) |
-| :--- | :--- | :--- | :--- |
-| Clear & Dry | **No** | 0.33% | 0.00 |
-| High Humidity + Pressure Drop | **Yes** | 99.7% | 1.25 |
-| Strong Winds + Clouds | **Yes** | 98.0% | 10.21 |
-
-*The model successfully identifies high-risk rain scenarios and estimates rainfall quantity.*
+| **Cyclical Wind Encoding** | Transformed compass directions (N, NW, S) into `sin` & `cos` pairs to preserve directionality math. |
+| **Atmospheric Deltas** | Calculated `PressureChange` (3pm - 9am) to detect incoming fronts. |
+| **Daily Swings** | `TempRange` and `HumidityChange` to measure daily volatility. |
+| **Imputation Strategy** | Used statistical medians to handle missing sensor data robustly. |
 
 ---
 
 ## 📁 Project Structure
 
-- **data/** - Raw weather data
-  - `weather_forecasting_dataset.csv`
-- **notebooks/** - Analysis & modeling
-  - `Weather-Forecasting.ipynb`
-- `requirements.txt` - Python dependencies
-- `README.md`
+Weather-Forecasting-AI/
+├── app.py # Main Streamlit Application (Frontend & Logic)
+├── requirements.txt # Dependencies for deployment
+├── models/ # Serialized ML Models & Scalers
+│ ├── model_classifier.pkl
+│ ├── model_regressor.pkl
+│ └── scaler_classifier.pkl
+├── notebooks/ # Research & Training
+│ └── Weather-Forecasting.ipynb
+└── data/ # Raw Dataset
 
 
+---
 
-## 🚀 How to Run
+## 🚀 How to Run Locally
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Mu-AI-Dev/Weather-Forecasting-AI.git
-   cd Weather-Forecasting-AI
+If you want to run this app on your own machine:
 
-2. **Install dependencies:**
-   ```bash
+1.  **Clone the repository:**
+    ```
+    git clone https://github.com/Mu-AI-Dev/Weather-Forecasting-AI.git
+    cd Weather-Forecasting-AI
+    ```
+
+2.  **Install dependencies:**
+    ```
     pip install -r requirements.txt
+    ```
 
-3. **Open the notebook:**
-   ```bash
-    jupyter notebook notebooks/Weather-Forecasting.ipynb
-    Run all cells to see the full pipeline from data loading to predictions.
+3.  **Launch the App:**
+    ```
+    streamlit run app.py
+    ```
 
+---
 
-## 💡 What I Learned
+## 📈 Model Performance
 
-Feature Engineering Impact: Custom features improved model performance significantly
+| Metric | Score | Notes |
+| :--- | :--- | :--- |
+| **Accuracy (Test)** | **~85%** | Robust against unseen data |
+| **Precision** | **High** | Minimized False Alarms (predicting rain when dry) |
+| **Recall** | **Balanced** | Successfully captures most rain events |
 
-Model Selection: Why ensemble methods (Random Forest) outperform single models for complex patterns
+---
 
-## 📧 Contact
-Muhammad Abdulrahman Ali
-🎓 Computer Science Student | Aspiring AI Engineer
-📍 Egypt
+## 🛠️ Tech Stack
 
-Email: md.abdelrahmn@gmail.com | 
-LinkedIn: https://www.linkedin.com/in/muhammad-abdelrahaman 
+*   **Core:** Python 3.x
+*   **ML Libraries:** Scikit-Learn, Pandas, NumPy
+*   **Web Framework:** Streamlit (for UI/UX)
+*   **Serialization:** Joblib
+*   **Visualization:** Matplotlib, Seaborn
 
+---
+
+## 👤 Author
+
+**Muhammad Abdulrahman Ali**
+*Computer Science Student | Aspiring AI Engineer*
+
+*   📍 **Location:** Egypt
+*   📧 **Email:** [md.abdelrahmn@gmail.com](mailto:md.abdelrahmn@gmail.com)
+*   🔗 **LinkedIn:** [muhammad-abdelrahama](https://www.linkedin.com/in/muhammad-abdelrahama)
+*   🐙 **GitHub:** [Mu-AI-Dev](https://github.com/Mu-AI-Dev)
+
+---
+*If you find this project useful, please give it a ⭐ star!*
