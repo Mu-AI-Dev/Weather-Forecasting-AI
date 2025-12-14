@@ -18,7 +18,7 @@
 
 ## 📸 Project Preview
 <!-- Upload a screenshot of your app to your repo and link it here for better engagement -->
-![App Screenshot](Capture.jpg)
+![App Screenshot](charts/weather_forecasting_UI.PNG)
 
 ---
 
