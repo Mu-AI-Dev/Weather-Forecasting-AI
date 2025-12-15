@@ -110,7 +110,7 @@ If you want to run this app on your own machine:
 
 | Metric | Score | Notes |
 | :--- | :--- | :--- |
-| **Accuracy (Test)** | **~85%** | Robust against unseen data |
+| **Accuracy (Test)** | **~89%** | Robust against unseen data |
 | **Precision** | **High** | Minimized False Alarms (predicting rain when dry) |
 | **Recall** | **Balanced** | Successfully captures most rain events |
 
